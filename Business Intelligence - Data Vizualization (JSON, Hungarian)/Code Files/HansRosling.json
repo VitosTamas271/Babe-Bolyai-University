@@ -1,0 +1,128 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "title": "The relationship between the matches played and the goals scored",
+    "width": 1250,
+    "height": 500,
+    "padding": 5,
+    "autosize": "pad",
+    "data": [
+      {
+        "name": "players",
+        "url": "https://raw.githubusercontent.com/csaladenes/course/refs/heads/main/ACMilan_PlayerStatistics.csv",
+        "format": {"type": "csv"},
+        "transform": [{"type": "filter", "expr": "datum.Year == yearFilter"}]
+      }
+    ],
+    "signals": [
+      {
+        "name": "yearFilter",
+        "value": 2023,
+        "bind": {
+          "input": "range",
+          "min": 2019,
+          "max": 2023,
+          "step": 1,
+          "name": "Select year"
+        }
+      }
+    ],
+    "scales": [
+      {
+        "name": "xscale",
+        "type": "linear",
+        "domain": {"data": "players", "field": "MatchesPlayed"},
+        "range": "width",
+        "nice": true
+      },
+      {
+        "name": "yscale",
+        "type": "linear",
+        "domain": {"data": "players", "field": "GoalsScored"},
+        "range": "height",
+        "nice": true
+      },
+      {
+        "name": "size",
+        "type": "linear",
+        "domain": {"data": "players", "field": "MinutesPlayed"},
+        "range": [4, 1000]
+      },
+      {
+        "name": "color",
+        "type": "ordinal",
+        "domain": [
+            "Italy",
+            "France",
+            "England",
+            "Portugal",
+            "Algeria",
+            "Spain",
+            "Bosnia",
+            "Brazil",
+            "Belgium",
+            "Germany",
+            "Denmark",
+            "Croatia",
+            "Senegal",
+            "USA",
+            "Sweden",
+            "Cote d'Ivoire",
+            "Turkey",
+            "Norway",
+            "Argentina",
+            "Poland",
+            "Switzerland",
+            "Uruguay",
+            "Columbia"
+        ],
+        "range": [
+            "#1f77b4",
+            "#ff7f0e",
+            "#2ca02c",
+            "#d62728",
+            "#9467bd",
+            "#8c564b",
+            "#e377c2",
+            "#7f7f7f",
+            "#bcbd22",
+            "#17becf",
+            "#aec7e8",
+            "#ffbb78",
+            "#98df8a",
+            "#ff9896",
+            "#c5b0d5",
+            "#c49c94",
+            "#f7b6d2",
+            "#c7c7c7",
+            "#dbdb8d",
+            "#9edae5",
+            "#393b79",
+            "#637939"
+        ]
+      }
+    ],
+    "axes": [
+      {"orient": "bottom", "scale": "xscale", "title": "Matches Played"},
+      {"orient": "left", "scale": "yscale", "title": "Goals Scored"}
+    ],
+    "legends": [{"fill": "color", "title": "Nation", "orient": "right"}],
+    "marks": [
+      {
+        "type": "symbol",
+        "from": {"data": "players"},
+        "encode": {
+          "enter": {
+            "x": {"scale": "xscale", "field": "MatchesPlayed"},
+            "y": {"scale": "yscale", "field": "GoalsScored"},
+            "size": {"scale": "size", "field": "MinutesPlayed"},
+            "fill": {"scale": "color", "field": "Nation"},
+            "tooltip": {
+              "signal": "datum.Player + ' (' + datum.Nation + '), Year: ' + datum.Year + ', Matches Played: ' + datum.MatchesPlayed + ', Goals Scored: ' + datum.GoalsScored + ', Minutes Played: ' + datum.MinutesPlayed"
+            }
+          },
+          "update": {"opacity": {"value": 0.7}},
+          "hover": {"opacity": {"value": 1}}
+        }
+      }
+    ]
+  }

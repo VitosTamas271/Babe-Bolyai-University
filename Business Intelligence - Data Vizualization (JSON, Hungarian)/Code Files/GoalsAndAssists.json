@@ -1,0 +1,95 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "AC Milan player statistics",
+        "subtitle": "The relation between the goals and assists provided by each player (2019-2023)"
+    },
+    "width": 1250,
+    "height": 500,
+    "data": {
+        "name": "playersStatistics",
+        "url": "ACMilan_PlayerStatistics.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "params": [
+        {
+            "name": "yearFilter",
+            "value": 2023,
+            "bind": {
+                "input": "select",
+                "options": [2019, 2020, 2021, 2022, 2023],
+                "labels": ["2019", "2020", "2021", "2022", "2023"],
+                "name": "Select Year"
+            }
+        },
+        {
+            "name": "goalsScored",
+            "value": "GoalsScored"
+        },
+        {
+            "name": "assistsProvided",
+            "value": "AssistsProvided"
+        }
+    ],
+    "transform": [
+        {
+            "filter": "datum.Year == yearFilter"
+        },
+        {
+            "calculate": "parseFloat(datum[goalsScored])", "as": "Goals Scored"
+        },
+        {
+            "calculate": "parseFloat(datum[assistsProvided])", "as": "Assists Provided"
+        },
+        {
+            "calculate": "datum['Goals Scored'] + datum['Assists Provided']", "as": "GoalsplusAssits"
+        }
+        
+    ],
+    "mark": {
+        "type": "circle",
+        "tooltip": true
+    },
+    "encoding": {
+        "x": {
+            "field": "Goals Scored",
+            "type": "quantitative",
+            "stack": null,
+            "axis": {
+                "format": "d",
+                "tickMinStep": 1,
+                "labelAngle": 0,
+                "labelOverlap": false
+            }
+        },
+        "y": {
+            "field": "Assists Provided",
+            "type": "quantitative",
+            "stack": null,
+            "axis": {
+                "format": "d",
+                "tickMinStep": 1,
+                "labelAngle": 0,
+                "labelOverlap": false
+            }
+        },
+        "size": {
+            "field": "GoalsplusAssits",
+            "type": "quantitative",
+            "scale": {"range": [100, 1000]}
+        },
+        "tooltip": [
+            {
+                "field": "Player", "type": "nominal"
+            },
+            {
+                "field": "Goals Scored", "type": "quantitative"
+            },
+            {
+                "field": "Assists Provided", "type": "quantitative"
+            }
+        ]
+    }
+}

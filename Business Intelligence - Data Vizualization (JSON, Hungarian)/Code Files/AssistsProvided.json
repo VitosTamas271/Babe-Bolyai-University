@@ -1,0 +1,63 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "AC Milan player statistics",
+        "subtitle": "Assists provided by each player (2019-2023)"
+    },
+    "width": 1250,
+    "height": 500,
+    "data": {
+        "url": "ACMilan_PlayerStatistics.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "params": [
+        {
+            "name": "yearFilter",
+            "value": 2023,
+            "bind": {
+                "input": "select",
+                "options": [2019, 2020, 2021, 2022, 2023],
+                "labels": ["2019", "2020", "2021", "2022", "2023"],
+                "name": "Select Year"
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "datum.Year == yearFilter"
+        },
+        {
+            "calculate": "toNumber(datum.AssistsProvided)", "as": "AssistsProvided"
+        },
+        {
+            "aggregate": [{"op": "sum", "field": "AssistsProvided", "as": "AssistsProvided"}],
+            "groupby": ["Player"]
+        }
+    ],
+    "mark": "point",
+    "encoding": {
+        "x": {
+            "field": "Player",
+            "type": "nominal",
+            "sort": {"field": "AssistsProvided", "order": "descending"},
+            "axis": {
+                "labelAngle": -45
+            }
+        },
+        "y": {
+            "field": "AssistsProvided",
+            "type": "quantitative",
+            "stack": null  
+        },
+        "tooltip": [
+            {
+                "field": "Player", "type": "nominal"
+            },
+            {
+                "field": "AssistsProvided", "type": "quantitative"
+            }
+        ]
+    }
+}

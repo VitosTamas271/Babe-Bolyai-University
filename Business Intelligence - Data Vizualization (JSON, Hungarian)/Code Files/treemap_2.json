@@ -1,0 +1,47 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "AC Milan Player Goals Scored",
+        "subtitle": "Goals scored by each player (2019-2023)"
+    },
+    "width": 1250,
+    "height": 500,
+    "data": {
+      "url": "ACMilan_PlayerStatistics.csv",
+      "format": {"type": "csv"}
+    },
+    "params": [
+        {
+            "name": "yearFilter",
+            "value": 2023,
+            "bind": {
+                "input": "select",
+                "options": [2019, 2020, 2021, 2022, 2023],
+                "labels": ["2019", "2020", "2021", "2022", "2023"],
+                "name": "Select Year: "
+            }
+        }
+    ],
+    "transform": [
+        {"filter": "datum.Year == yearFilter"},
+        {"filter": "datum.GoalsScored > 0"},
+        {"window": [{"op": "rank", "as": "rank"}], "sort": [{"field": "GoalsScored", "order": "descending"}]},
+        {"filter": "datum.rank <= 10"},
+        {"window": [{"op": "row_number", "as": "rowNumber"}]},
+        {"filter": "datum.rowNumber <= 10"}
+    ],
+    "mark": {
+        "type": "rect",
+        "tooltip": true
+    },
+    "encoding": {
+        "x": {"field": "GoalsScored", "type": "quantitative", "axis": {"title": "Goals scored", "format": "d", "tickCount": 10}},
+        "y": {"field": "Player", "type": "nominal", "axis": {"title": "Player name"}},
+        "size": {"field": "GoalsScored", "type": "quantitative"},
+        "color": {"field": "GoalsScored", "type": "quantitative", "scale": {"scheme": "blues"}, "legend": {"title": "Goals scored"}}
+    },
+    "tooltip": [
+      {"field": "Player", "type": "nominal", "title": "Player"},
+      {"field": "GoalsScored", "type": "quantitative", "title": "Goals Scored"}
+    ]
+}

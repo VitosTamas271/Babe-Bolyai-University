@@ -1,0 +1,235 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "AC Milan player statistics",
+        "subtitle": "The relation between the statisctics of each player (2019-2023)"
+    },
+    "width": 1250,
+    "height": 500,
+    "data": {
+        "name": "playersStatistics",
+        "url": "ACMilan_PlayerStatistics.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "params": [
+        {
+            "name": "yearFilter",
+            "value": 2023,
+            "bind": {
+                "input": "select",
+                "options": [2019, 2020, 2021, 2022, 2023],
+                "labels": ["2019", "2020", "2021", "2022", "2023"],
+                "name": "Select Year"
+            }
+        },
+        {
+            "name": "xAxis",
+            "value": "MatchesPlayed",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "MatchesPlayed",
+                    "PlayedStarting11",
+                    "MinutesPlayed",
+                    "GoalsScored",
+                    "AssistsProvided",
+                    "GoalsAssists",
+                    "NonPenaltyGoals",
+                    "GoalsFromPenalty",
+                    "PenaltyKicksAttempted",
+                    "YellowCards",
+                    "RedCards",
+                    "ExpectedGoals_xG",
+                    "ExpectedNonPenaltyGoals",
+                    "ExpectedAssistsProvided",
+                    "ExpectedNonPenaltyGoalsAssistsProvided",
+                    "ProgressiveCarries",
+                    "ProgressivePasses",
+                    "ProgressivePassesReceived",
+                    "GoalsPer90Minutes",
+                    "AssistsPer90Minutes",
+                    "GoalsAssistsPer90Minutes",
+                    "NonPenaltyGoalsPer90Minutes",
+                    "NonPenaltyGoalsAssistsPer90Minutes",
+                    "ExpectedGoalsPer90Minutes",
+                    "ExpectedAssitsPer90Minutes",
+                    "ExpectedGoalsAssitsPer90Minutes",
+                    "NonPenaltyExpectedGoalsPer90Minutes",
+                    "NonPenaltyExpectedGoalsAssistsPer90Minutes",
+                    "InterceptionsPerGame",
+                    "TacklesPerGame",
+                    "DribbledPastPerGame",
+                    "ClearancesPerGame",
+                    "GroundDuelsWon",
+                    "AerialDuelsWon"
+                ]
+            }
+        },
+        {
+                "name": "yAxis",
+                "value": "PlayedStarting11",
+                "bind": {
+                "input": "select",
+                "options": [
+                    "MatchesPlayed",
+                    "PlayedStarting11",
+                    "MinutesPlayed",
+                    "GoalsScored",
+                    "AssistsProvided",
+                    "GoalsAssists",
+                    "NonPenaltyGoals",
+                    "GoalsFromPenalty",
+                    "PenaltyKicksAttempted",
+                    "YellowCards",
+                    "RedCards",
+                    "ExpectedGoals_xG",
+                    "ExpectedNonPenaltyGoals",
+                    "ExpectedAssistsProvided",
+                    "ExpectedNonPenaltyGoalsAssistsProvided",
+                    "ProgressiveCarries",
+                    "ProgressivePasses",
+                    "ProgressivePassesReceived",
+                    "GoalsPer90Minutes",
+                    "AssistsPer90Minutes",
+                    "GoalsAssistsPer90Minutes",
+                    "NonPenaltyGoalsPer90Minutes",
+                    "NonPenaltyGoalsAssistsPer90Minutes",
+                    "ExpectedGoalsPer90Minutes",
+                    "ExpectedAssitsPer90Minutes",
+                    "ExpectedGoalsAssitsPer90Minutes",
+                    "NonPenaltyExpectedGoalsPer90Minutes",
+                    "NonPenaltyExpectedGoalsAssistsPer90Minutes",
+                    "InterceptionsPerGame",
+                    "TacklesPerGame",
+                    "DribbledPastPerGame",
+                    "ClearancesPerGame",
+                    "GroundDuelsWon",
+                    "AerialDuelsWon"
+                    ]
+                }
+        },
+        {
+            "name": "SizeAxis",
+            "value": "MatchesPlayed",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "MatchesPlayed",
+                    "PlayedStarting11",
+                    "MinutesPlayed",
+                    "GoalsScored",
+                    "AssistsProvided",
+                    "GoalsAssists",
+                    "NonPenaltyGoals",
+                    "GoalsFromPenalty",
+                    "PenaltyKicksAttempted",
+                    "YellowCards",
+                    "RedCards",
+                    "ExpectedGoals_xG",
+                    "ExpectedNonPenaltyGoals",
+                    "ExpectedAssistsProvided",
+                    "ExpectedNonPenaltyGoalsAssistsProvided",
+                    "ProgressiveCarries",
+                    "ProgressivePasses",
+                    "ProgressivePassesReceived",
+                    "GoalsPer90Minutes",
+                    "AssistsPer90Minutes",
+                    "GoalsAssistsPer90Minutes",
+                    "NonPenaltyGoalsPer90Minutes",
+                    "NonPenaltyGoalsAssistsPer90Minutes",
+                    "ExpectedGoalsPer90Minutes",
+                    "ExpectedAssitsPer90Minutes",
+                    "ExpectedGoalsAssitsPer90Minutes",
+                    "NonPenaltyExpectedGoalsPer90Minutes",
+                    "NonPenaltyExpectedGoalsAssistsPer90Minutes",
+                    "InterceptionsPerGame",
+                    "TacklesPerGame",
+                    "DribbledPastPerGame",
+                    "ClearancesPerGame",
+                    "GroundDuelsWon",
+                    "AerialDuelsWon"
+                ],
+                "labels": [
+                    "MatchesPlayed",
+                    "PlayedStarting11",
+                    "MinutesPlayed",
+                    "GoalsScored",
+                    "AssistsProvided",
+                    "GoalsAssists",
+                    "NonPenaltyGoals",
+                    "GoalsFromPenalty",
+                    "PenaltyKicksAttempted",
+                    "YellowCards",
+                    "RedCards",
+                    "ExpectedGoals_xG",
+                    "ExpectedNonPenaltyGoals",
+                    "ExpectedAssistsProvided",
+                    "ExpectedNonPenaltyGoalsAssistsProvided",
+                    "ProgressiveCarries",
+                    "ProgressivePasses",
+                    "ProgressivePassesReceived",
+                    "GoalsPer90Minutes",
+                    "AssistsPer90Minutes",
+                    "GoalsAssistsPer90Minutes",
+                    "NonPenaltyGoalsPer90Minutes",
+                    "NonPenaltyGoalsAssistsPer90Minutes",
+                    "ExpectedGoalsPer90Minutes",
+                    "ExpectedAssitsPer90Minutes",
+                    "ExpectedGoalsAssitsPer90Minutes",
+                    "NonPenaltyExpectedGoalsPer90Minutes",
+                    "NonPenaltyExpectedGoalsAssistsPer90Minutes",
+                    "InterceptionsPerGame",
+                    "TacklesPerGame",
+                    "DribbledPastPerGame",
+                    "ClearancesPerGame",
+                    "GroundDuelsWon",
+                    "AerialDuelsWon"
+                ],
+                "name": "Select size metric: "
+            }
+        }
+    ],
+        "transform": [
+            {"filter": "datum.Year == yearFilter"},
+            {"calculate": "parseFloat(datum[xAxis])", "as": "x"},
+            {"calculate": "parseFloat(datum[yAxis])", "as": "y"},
+            {"calculate": "parseFloat(datum[SizeAxis])", "as": "size"}
+        ],
+        "mark": "point",
+        "encoding": {
+            "x": {
+                "field": "x", 
+                "type": "quantitative",
+                "title": {"signal": "xAxis"}
+            },
+            "y": {
+                "field": "y", 
+                "type": "quantitative",
+                "title": {"signal": "yAxis"}
+            },
+            "size": {
+                "field": "size",
+                "type": "quantitative",
+                "scale": {"range": [100, 1000]}
+            },
+            "tooltip": [
+                {
+                    "field": "Player", 
+                    "type": "nominal",
+                    "title": "Player name: "
+                },
+                {
+                    "field": "x",
+                    "type": "quantitative",
+                    "title": "Value for the X-axes: "
+                },
+                {
+                    "field": "y",
+                    "type": "quantitative",
+                    "title": "Value for the Y-axes: "
+                }
+            ]
+        }
+}
